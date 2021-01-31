@@ -1,0 +1,73 @@
+@import "./assets/css/reset.css";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.cardsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  max-width: 1200px;
+}
+.cardWrapper {
+  display: flex;
+  margin: 2rem 1rem;
+}
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 250px;
+}
+.cardImageWrapper {
+  position: relative;
+  width: inherit;
+  height: 250px;
+}
+.initials {
+  font-size: 2rem;
+  color: white;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerIcon {
+  display: flex;
+  flex-direction: row;
+}
+.cardImage {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+  height: inherit;
+  width: inherit;
+  object-fit: cover;
+  object-position: center;
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.cardName {
+  /* margin: 1rem 0; */
+  font-weight: bold;
+}
+.cardName ~ .cardName {
+  margin-left: 1rem;
+}
+
+.cardDescription {
+  text-align: justify;
+}
+.containerIcon {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
