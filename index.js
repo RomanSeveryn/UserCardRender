@@ -2,6 +2,11 @@
 
 
 
+const mapOfContacs = new Map();
+mapOfContacs.set('www.facebook.com', './assets/icons/facebook.png');
+mapOfContacs.set('twitter.com', './assets/icons/Twitter.png');
+mapOfContacs.set('www.instagram.com', './assets/icons/instagramm.png');
+
 const cardsContainer = document.getElementById('root');
 
 
@@ -18,10 +23,26 @@ function createPlaceCards(place) {
       createImageWrapper(place),
       fullName(place),
       createInfoPharagraph(),
+      createElement('ul', { classNames: ['containerIcon'] }, [
+        // createIcons(contacts = []),
+      ]),
     ]),
   ]);
   return card;
 }
+
+function createIcons(contacts = []) {
+  const imgOfContacs = document.createElement('img');
+  imgOfContacs.classList.add('iconWrapper');
+
+  for (let icon of mapOfContacs) {
+    if (icon.keys === contacts.hostname) {
+      imgOfContacs.setAttribute('src', icon.values);
+    }
+  }
+  return imgOfContacs;
+}
+
 
 function fullName(place) {
   const { firstName, lastName } = place;
