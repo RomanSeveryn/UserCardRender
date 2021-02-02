@@ -3,28 +3,29 @@
 
 
 const mapOfContacs = new Map();
-mapOfContacs.set('www.facebook.com', './assets/icons/facebook.png');
-mapOfContacs.set('twitter.com', './assets/icons/Twitter.png');
-mapOfContacs.set('www.instagram.com', './assets/icons/instagramm.png');
+mapOfContacs.set('www.facebook.com', '/assets/icons/facebook.png');
+mapOfContacs.set('twitter.com', '/assets/icons/Twitter.png');
+mapOfContacs.set('www.instagram.com', '/assets/icons/instagramm.png');
 
 const cardsContainer = document.getElementById('root');
 
 
-const cards = responseData.map((place) => createPlaceCards(place));
+const cards = responseData.map((user) => createUserCards(user));
 //.filter((place) => place.firstName) - после map поставить для проверки на имя.
 cardsContainer.append(...cards);
 
 
 
 
-function createPlaceCards(place) {
+function createUserCards(user) {
+  const icons = createIcons(user.contacts);
   const card = createElement('li', { classNames: ['cardWrapper'] }, [
     createElement('article', { classNames: ['cardContainer'] }, [
-      createImageWrapper(place),
-      fullName(place),
+      createImageWrapper(user),
+      fullName(user),
       createInfoPharagraph(),
       createElement('ul', { classNames: ['containerIcon'] }, [
-        // createIcons(contacts = []),
+        ...icons,
       ]),
     ]),
   ]);
@@ -32,20 +33,30 @@ function createPlaceCards(place) {
 }
 
 function createIcons(contacts = []) {
-  const imgOfContacs = document.createElement('img');
-  imgOfContacs.classList.add('iconWrapper');
+  const contactLink = contacts.map((link) => {
+    const url = new URL(link);
+    // console.log(mapOfContacs.get(url.hostname));
+    
+    const pathOfIcon = mapOfContacs.get(url.hostname);
+    const img = document.createElement('img');
+    img.setAttribute('src', pathOfIcon);
+    img.classList.add('iconWrapper');
 
-  for (let icon of mapOfContacs) {
-    if (icon.keys === contacts.hostname) {
-      imgOfContacs.setAttribute('src', icon.values);
-    }
-  }
-  return imgOfContacs;
+    const linkOfContacs = document.createElement('a');
+    linkOfContacs.setAttribute('href', '#');
+    linkOfContacs.classList.add('link');
+    img.append(linkOfContacs);
+    console.log(linkOfContacs);
+    // console.log(url);
+    return img;
+  })
+  
+  return contactLink;
 }
 
 
-function fullName(place) {
-  const { firstName, lastName } = place;
+function fullName(user) {
+  const { firstName, lastName } = user;
   const wrapperFullName = document.createElement('div');
   wrapperFullName.classList.add('flex');
 
@@ -68,8 +79,8 @@ function createInfoPharagraph() {
   return pharagraph;
 }
 
-function createImageWrapper(place) {
-  const { firstName, id } = place;
+function createImageWrapper(user) {
+  const { firstName, id } = user;
   const imageWrapper = document.createElement('div');
   imageWrapper.setAttribute('id', `wrapper${id}`)
   imageWrapper.classList.add('cardImageWrapper');
@@ -79,7 +90,7 @@ function createImageWrapper(place) {
   initials.classList.add('initials');
   initials.append(document.createTextNode(firstName[0] || ''));
 
-  imageWrapper.append(initials, createImage(place, { className: 'cardImage' }));
+  imageWrapper.append(initials, createImage(user, { className: 'cardImage' }));
   return imageWrapper;
 }
 
@@ -91,7 +102,7 @@ function createImage({ firstName, profilePicture, id }) {
   img.setAttribute('src', profilePicture);
 
   img.addEventListener('error', handleImageErorr);
-  img.addEventListener('load', handleImageLoad);
+  // img.addEventListener('load', handleImageLoad);
   return img;
 }
 
