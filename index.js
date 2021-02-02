@@ -45,10 +45,11 @@ function createIcons(contacts = []) {
     const linkOfContacs = document.createElement('a');
     linkOfContacs.setAttribute('href', '#');
     linkOfContacs.classList.add('link');
-    img.append(linkOfContacs);
+    // img.append(linkOfContacs);
+    linkOfContacs.append(img);
     console.log(linkOfContacs);
     // console.log(url);
-    return img;
+    return linkOfContacs;
   })
   
   return contactLink;
