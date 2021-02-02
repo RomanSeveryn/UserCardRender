@@ -42,7 +42,7 @@ function createIcons(contacts = []) {
     img.classList.add('iconWrapper');
 
     const linkOfContacs = document.createElement('a');
-    linkOfContacs.setAttribute('href', '#');
+    linkOfContacs.setAttribute('href', url.href);
     linkOfContacs.classList.add('link');
     linkOfContacs.append(img);
     // console.log(linkOfContacs);
