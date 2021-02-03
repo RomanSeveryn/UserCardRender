@@ -15,6 +15,12 @@ const cards = responseData.map((user) => createUserCards(user));
 cardsContainer.append(...cards);
 
 
+// const jsonUsers = fetch(
+//   "http://192.168.1.148:3000/users")
+//   .then((json) => json.json())
+//   .then((data) => console.log(data));
+
+
 
 
 function createUserCards(user) {
@@ -35,21 +41,21 @@ function createUserCards(user) {
 function createIcons(contacts = []) {
   const contactLink = contacts.map((link) => {
     const url = new URL(link);
-    
+
     const pathOfIcon = mapOfContacs.get(url.hostname);
     const img = document.createElement('img');
     img.setAttribute('src', pathOfIcon);
     img.classList.add('iconWrapper');
 
     const linkOfContacs = document.createElement('a');
-    linkOfContacs.setAttribute('href', url.href);
+    linkOfContacs.setAttribute('href', '#');
     linkOfContacs.classList.add('link');
     linkOfContacs.append(img);
     // console.log(linkOfContacs);
     // console.log(url);
     return linkOfContacs;
   })
-  
+
   return contactLink;
 }
 
