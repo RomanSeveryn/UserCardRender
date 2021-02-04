@@ -10,18 +10,21 @@ mapOfContacs.set('www.instagram.com', '/assets/icons/instagramm.png');
 const cardsContainer = document.getElementById('root');
 
 
-const cards = responseData.map((user) => createUserCards(user));
-//.filter((place) => place.firstName) - после map поставить для проверки на имя.
-cardsContainer.append(...cards);
 
 
-// const jsonUsers = fetch(
-//   "http://192.168.1.148:3000/users")
-//   .then((json) => json.json())
-//   .then((data) => console.log(data));
-
-
-
+const jsonUsers = fetch(
+  "./assets/js/data.json")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((err) => {
+    console.log('Error')
+  });
+  
+  
+  const cards = responseData.map((user) => createUserCards(user));
+  //.filter((place) => place.firstName) - после map поставить для проверки на имя.
+  cardsContainer.append(...cards);
+  
 
 function createUserCards(user) {
   const icons = createIcons(user.contacts);
