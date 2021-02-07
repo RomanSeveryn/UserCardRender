@@ -12,13 +12,13 @@ const cardsContainer = document.getElementById('root');
 
 
 
-const jsonUsers = fetch(
-  "./assets/js/data.json")
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((err) => {
-    console.log('Error')
-  });
+// const jsonUsers = fetch(
+//   "./assets/js/data.json")
+//   .then((response) => response.json())
+//   .then((data) => console.log(data))
+//   .catch((err) => {
+//     console.log('Error')
+//   });
   
   
   const cards = responseData.map((user) => createUserCards(user));
@@ -44,14 +44,14 @@ function createUserCards(user) {
 function createIcons(contacts = []) {
   const contactLink = contacts.map((link) => {
     const url = new URL(link);
-
+    console.log(url)
     const pathOfIcon = mapOfContacs.get(url.hostname);
     const img = document.createElement('img');
     img.setAttribute('src', pathOfIcon);
     img.classList.add('iconWrapper');
 
     const linkOfContacs = document.createElement('a');
-    linkOfContacs.setAttribute('href', '#');
+    linkOfContacs.setAttribute('href', url);
     linkOfContacs.classList.add('link');
     linkOfContacs.append(img);
     // console.log(linkOfContacs);
